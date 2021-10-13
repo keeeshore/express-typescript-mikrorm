@@ -4,12 +4,14 @@ import {Author} from "./entities/Author";
 import {Book} from "./entities/Book";
 
 const bodyParser = require("body-parser");
+const cors = require('cors')
 const app = express();
 const port = 3000;
 
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 
 let orm: MikroORM = null;
 

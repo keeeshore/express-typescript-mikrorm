@@ -17,11 +17,13 @@ const core_1 = require("@mikro-orm/core");
 const Author_1 = require("./entities/Author");
 const Book_1 = require("./entities/Book");
 const bodyParser = require("body-parser");
+const cors = require('cors');
 const app = (0, express_1.default)();
 const port = 3000;
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 let orm = null;
 const getBooks = (id) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("ORM ::: getBooks id = ", id);
