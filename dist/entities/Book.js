@@ -13,10 +13,14 @@ exports.Book = void 0;
 const core_1 = require("@mikro-orm/core");
 const BaseEntity_1 = require("./BaseEntity");
 const Author_1 = require("./Author");
+const BookGenre_1 = require("./BookGenre");
 let Book = class Book extends BaseEntity_1.BaseEntity {
-    constructor({ author_id, title, publisher }) {
+    constructor({ author_id = undefined, title, publisher }) {
         super();
-        this.author_id = author_id;
+        this.bookGenres = new core_1.Collection(this);
+        if (author_id) {
+            this.author_id = author_id;
+        }
         this.title = title;
         this.publisher = publisher;
     }
@@ -37,6 +41,10 @@ __decorate([
     (0, core_1.ManyToOne)(() => Author_1.Author),
     __metadata("design:type", Author_1.Author)
 ], Book.prototype, "author", void 0);
+__decorate([
+    (0, core_1.OneToMany)(() => BookGenre_1.BookGenre, bookGenre => bookGenre.book, { cascade: [core_1.Cascade.ALL] }),
+    __metadata("design:type", Object)
+], Book.prototype, "bookGenres", void 0);
 Book = __decorate([
     (0, core_1.Entity)(),
     __metadata("design:paramtypes", [Object])

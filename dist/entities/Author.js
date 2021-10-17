@@ -14,7 +14,7 @@ const core_1 = require("@mikro-orm/core");
 const BaseEntity_1 = require("./BaseEntity");
 const Book_1 = require("./Book");
 let Author = class Author extends BaseEntity_1.BaseEntity {
-    constructor({ name, age, email }) {
+    constructor({ id = undefined, name, age, email }) {
         super();
         // @OneToMany(() => Photos, p => p.uid, { cascade: [Cascade.ALL] })
         // photos = new Collection<Photos>(this);
@@ -25,6 +25,10 @@ let Author = class Author extends BaseEntity_1.BaseEntity {
         // @OneToMany({ entity: () => Photos, mappedBy: 'uid', orphanRemoval: true })
         // photos = new Collection<Photos>(this);
         this.books = new core_1.Collection(this);
+        if (id) {
+            this.id = id;
+            return;
+        }
         this.name = name;
         this.age = age;
         this.email = email;

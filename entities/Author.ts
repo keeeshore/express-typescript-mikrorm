@@ -14,8 +14,12 @@ export class Author extends BaseEntity {
     @Property()
     email: string;
 
-    constructor({ name, age, email }) {
+    constructor({ id = undefined, name, age, email }) {
         super();
+        if (id) {
+           this.id = id;
+           return;
+        }
         this.name = name;
         this.age = age;
         this.email = email;
